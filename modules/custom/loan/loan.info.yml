@@ -1,0 +1,5 @@
+name: 'loan'
+type: module
+description: 'Module for loan amortization schedule'
+core: 8.x
+package: 'Custom'

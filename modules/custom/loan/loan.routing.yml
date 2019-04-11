@@ -1,0 +1,17 @@
+
+loan.loan_form:
+  path: '/loan/form/loan'
+  defaults:
+    _form: '\Drupal\loan\Form\LoanForm'
+    _title: 'LoanForm'
+  requirements:
+    _access: 'TRUE'
+  
+
+loan.loan_controller_show:
+  path: '/loan/show'
+  defaults:
+    _controller: '\Drupal\loan\Controller\LoanController::show'
+    _title: 'show'
+  requirements:
+    _permission: 'access content'

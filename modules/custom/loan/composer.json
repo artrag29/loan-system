@@ -1,0 +1,14 @@
+{
+  "name": "drupal/loan",
+  "type": "drupal-module",
+  "description": "Module for loan amortization schedule",
+  "keywords": ["Drupal"],
+  "license": "GPL-2.0+",
+  "homepage": "https://www.drupal.org/project/loan",
+  "minimum-stability": "dev",
+  "support": {
+    "issues": "https://www.drupal.org/project/issues/loan",
+    "source": "http://cgit.drupalcode.org/loan"
+  },
+  "require": { }
+}

@@ -1,0 +1,4 @@
+services:
+  loan.calculation:
+    class: Drupal\loan\Service\Calculation
+    arguments: []

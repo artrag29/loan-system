@@ -33,29 +33,34 @@ class LoanForm extends FormBase {
       '#type' => 'number',
       '#title' => $this->t('Loan Amount'),
       '#description' => $this->t('Loan Amount'),
+      '#default_value' => '0',
       '#weight' => '0',
     ];
     $form['interest_rate'] = [
       '#type' => 'number',
       '#title' => $this->t('Annual Interest Rate'),
       '#description' => $this->t('Annual Interest Rate'),
+      '#default_value' => '0',
       '#weight' => '0',
     ];
     $form['loan_period'] = [
       '#type' => 'number',
       '#title' => $this->t('Loan Period in Years'),
       '#description' => $this->t('Loan Period in Years'),
+      '#default_value' => '0',
       '#weight' => '0',
     ];
     $form['payments_per_year'] = [
       '#type' => 'number',
       '#title' => $this->t('Number of Payments Per Year'),
       '#description' => $this->t('Number of Payments Per Year'),
+      '#default_value' => '0',
       '#weight' => '0',
     ];
     $form['extra_payments'] = [
       '#type' => 'number',
       '#title' => $this->t('Optional Extra Payments'),
+      '#default_value' => '0',
       '#weight' => '0',
     ];
     $form['submit'] = [
@@ -91,13 +96,104 @@ class LoanForm extends FormBase {
 
     $calculator = Drupal::service('loan.calculation');
 
-    $calculator->calculation($start_date, $interest_rate, $loan_amount, $loan_period, $payments_per_year,  $extra_payments);
+    $results = $calculator->calculation($start_date, $interest_rate, $loan_amount, $loan_period, $payments_per_year,  $extra_payments);
 
     $form_state-> setRebuild();
 
     // Display result.
 
 
+    $header = [
+      [
+        'data' => t('Loan Summary'),
+        'class' => 'text-nowrap',
+      ],
+    ];
+
+    $output  = [
+        [
+          t('Scheduled Payment'),
+          $results['amount'],
+        ],
+
+
+      [
+         t('Scheduled Number of Payments'),
+         $results['months'],
+      ],
+      [
+         t('Actual Number of Payments'),
+         $results['i'],
+      ],
+      [
+         t('Total Early Payments'),
+         $results['total_extra_payments'],
+      ],
+      [
+         t('Total Interest'),
+         $results['total_interest'],
+      ],
+    ];
+
+    $table_1 = [
+      '#type' => 'table',
+      '#header' => $header,
+      '#rows' => $output,
+    ];
+
+
+    $header = [
+      [
+        'data' => t('PmtNo.'),
+        'class' => 'text-nowrap',
+      ],
+      [
+        'data' => t('Payment Date'),
+        'class' => 'text-nowrap',
+      ],
+      [
+        'data' => t('Beginning Balance'),
+        'class' => 'text-nowrap',
+      ],
+      [
+        'data' => t('Scheduled Payment'),
+        'class' => 'text-nowrap',
+      ],
+      [
+        'data' => t('Extra Payment'),
+        'class' => 'text-nowrap',
+      ],
+      [
+        'data' => t('Total Payment'),
+        'class' => 'text-nowrap',
+      ],
+      [
+        'data' => t('Principal'),
+        'class' => 'text-nowrap',
+      ],
+      [
+        'data' => t('Interest'),
+        'class' => 'text-nowrap',
+      ],
+      [
+        'data' => t('Ending Balance'),
+        'class' => 'text-nowrap',
+      ],
+      [
+        'data' => t('Cumulative Interest'),
+        'class' => 'text-nowrap',
+      ],
+      '',
+    ];
+
+    $table_2 = [
+      '#type' => 'table',
+      '#header' => $header,
+      '#rows' => $results['rows'],
+    ];
+
+    Drupal::messenger()->addMessage($table_1);
+    Drupal::messenger()->addMessage($table_2);
 
     return;
   }

@@ -43,9 +43,7 @@ class LoanController extends ControllerBase {
     $rows = [];
 
 
-
     $loanForm = \Drupal::formBuilder()->getForm('Drupal\loan\Form\LoanForm');
-
 
     $rows[] = [
       [

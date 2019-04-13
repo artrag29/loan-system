@@ -34,14 +34,17 @@ class Calculation {
       $interest = number_format(($beginning_balance * ($interest_rate/100/$payments_per_year)),3);
       if ($amount + $extra_payments < $beginning_balance) {
         $total_payment = $amount + $extra_payments;
-      }else {
+      }
+      else {
         $total_payment = $beginning_balance;
       }
       if ($amount + $extra_payments < $beginning_balance) {
          $extra_payments;
-      } elseif ( $amount < $beginning_balance ) {
+      }
+      elseif ( $amount < $beginning_balance ) {
         $extra_payments = $beginning_balance - $amount;
-      } else {
+      }
+      else {
         $extra_payments = 0;
       }
 
@@ -80,7 +83,14 @@ class Calculation {
     }
 
 
-    return;
+    return [
+      'amount' => $amount,
+      'months' => $months,
+      'i'=> $i,
+      'total_interest' => $total_interest,
+      'total_extra_payments' => $total_extra_payments,
+      'rows' => $rows,
+    ];
   }
 
 }

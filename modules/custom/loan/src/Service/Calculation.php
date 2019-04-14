@@ -2,7 +2,6 @@
 
 namespace Drupal\loan\Service;
 
-use PhpOffice\PhpSpreadsheet\Calculation\Financial;
 
 /**
  * Class calculation.

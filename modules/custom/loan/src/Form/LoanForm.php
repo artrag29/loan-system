@@ -28,6 +28,7 @@ class LoanForm extends FormBase {
       '#title' => $this->t('Start Date of Loan'),
       '#description' => $this->t('Start Date of Loan'),
       '#weight' => '0',
+      '#required' => TRUE,
     ];
     $form['loan_amount'] = [
       '#type' => 'number',
@@ -35,6 +36,7 @@ class LoanForm extends FormBase {
       '#description' => $this->t('Loan Amount'),
       '#default_value' => '0',
       '#weight' => '0',
+      '#required' => TRUE,
     ];
     $form['interest_rate'] = [
       '#type' => 'number',
@@ -42,6 +44,7 @@ class LoanForm extends FormBase {
       '#description' => $this->t('Annual Interest Rate'),
       '#default_value' => '0',
       '#weight' => '0',
+      '#required' => TRUE,
     ];
     $form['loan_period'] = [
       '#type' => 'number',
@@ -49,6 +52,7 @@ class LoanForm extends FormBase {
       '#description' => $this->t('Loan Period in Years'),
       '#default_value' => '0',
       '#weight' => '0',
+      '#required' => TRUE,
     ];
     $form['payments_per_year'] = [
       '#type' => 'number',
@@ -56,12 +60,14 @@ class LoanForm extends FormBase {
       '#description' => $this->t('Number of Payments Per Year'),
       '#default_value' => '0',
       '#weight' => '0',
+      '#required' => TRUE,
     ];
     $form['extra_payments'] = [
       '#type' => 'number',
       '#title' => $this->t('Optional Extra Payments'),
       '#default_value' => '0',
       '#weight' => '0',
+      '#required' => TRUE,
     ];
     $form['submit'] = [
       '#type' => 'submit',
@@ -76,6 +82,36 @@ class LoanForm extends FormBase {
    */
   public function validateForm(array &$form, FormStateInterface $form_state) {
     parent::validateForm($form, $form_state);
+    $start_date = $form_state->getValue('start_date');
+    $interest_rate = $form_state->getValue('interest_rate');
+    $loan_amount = $form_state->getValue('loan_amount');
+    $loan_period = $form_state->getValue('loan_period');
+    $payments_per_year = $form_state->getValue('payments_per_year');
+    $extra_payments = $form_state->getValue('extra_payments');
+
+    if ( $start_date == NULL ) {
+      $form_state->setErrorByName('start_date', $this->t('You must fill Start Date of Loan field'));
+
+    }
+    if ($interest_rate == NULL){
+      $form_state->setErrorByName('interest_rate', $this->t('You must fill Loan Amount field'));
+    }
+
+    if ($loan_amount == NULL){
+      $form_state->setErrorByName('loan_amount', $this->t('You must fill Annual Interest Rate field'));
+    }
+
+    if ($loan_period == NULL){
+      $form_state->setErrorByName('loan_period', $this->t('You must fill Loan Period in Years field'));
+    }
+
+    if ($payments_per_year == NULL){
+      $form_state->setErrorByName('payments_per_year', $this->t('You must fill Number of Payments Per Year field'));
+    }
+
+    if ($extra_payments == NULL){
+      $form_state->setErrorByName('extra_payments', $this->t('You must fill Optional Extra Payments field'));
+    }
   }
 
   /**
@@ -83,8 +119,8 @@ class LoanForm extends FormBase {
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
 
-    $uid = \Drupal::currentUser()->id();
-    \Drupal::logger('loan')->info($uid);
+    $uid = Drupal::currentUser()->id();
+    Drupal::logger('loan')->info($uid);
 
 
     $start_date = $form_state->getValue('start_date');

@@ -1,0 +1,26 @@
+uuid: f528222e-8898-4bb2-8746-017f4565c141
+langcode: en
+status: true
+dependencies:
+  module:
+    - loan
+    - system
+  theme:
+    - bartik
+id: loanblock
+theme: bartik
+region: content
+weight: 0
+provider: null
+plugin: loan_block
+settings:
+  id: loan_block
+  label: 'Loan block'
+  provider: loan
+  label_display: visible
+visibility:
+  request_path:
+    id: request_path
+    pages: '<front>'
+    negate: false
+    context_mapping: {  }

@@ -8,8 +8,7 @@
         "wikimedia/composer-merge-plugin": "^1.4",
         "drupal/console": "~1.0",
         "drupal/devel": "^2.0",
-        "drush/drush": "^9.6",
-        "phpoffice/phpspreadsheet": "^1.6"
+        "drush/drush": "^9.6"
     },
     "replace": {
         "drupal/core": "^8.6"

@@ -11,7 +11,6 @@ use Drupal\Core\Form\FormStateInterface;
  */
 class LoanForm extends FormBase {
 
-
   /**
    * {@inheritdoc}
    */
@@ -96,7 +95,7 @@ class LoanForm extends FormBase {
 
       $calculator = Drupal::service('loan.calculation');
 
-      $results = $calculator->calculation($start_date, $interest_rate, $loan_amount, $loan_period, $payments_per_year,  $extra_payments);
+      $results = $calculator->calculation($start_date, $interest_rate, $loan_amount, $loan_period, $payments_per_year, $extra_payments);
 
       $header = [
         [
@@ -105,12 +104,11 @@ class LoanForm extends FormBase {
         ],
       ];
 
-      $output  = [
+      $output = [
         [
           t('Scheduled Payment'),
           $results['amount'],
         ],
-
 
         [
           t('Scheduled Number of Payments'),
@@ -135,7 +133,6 @@ class LoanForm extends FormBase {
         '#header' => $header,
         '#rows' => $output,
       ];
-
 
       $header = [
         [
@@ -196,7 +193,6 @@ class LoanForm extends FormBase {
       ];
     }
 
-
     return $form;
   }
 
@@ -212,27 +208,27 @@ class LoanForm extends FormBase {
     $payments_per_year = $form_state->getValue('payments_per_year');
     $extra_payments = $form_state->getValue('extra_payments');
 
-    if ( $start_date == NULL ) {
+    if ($start_date == NULL) {
       $form_state->setErrorByName('start_date', $this->t('You must fill Start Date of Loan field'));
 
     }
-    if ($interest_rate == NULL){
+    if ($interest_rate == NULL) {
       $form_state->setErrorByName('interest_rate', $this->t('You must fill Loan Amount field'));
     }
 
-    if ($loan_amount == NULL){
+    if ($loan_amount == NULL) {
       $form_state->setErrorByName('loan_amount', $this->t('You must fill Annual Interest Rate field'));
     }
 
-    if ($loan_period == NULL){
+    if ($loan_period == NULL) {
       $form_state->setErrorByName('loan_period', $this->t('You must fill Loan Period in Years field'));
     }
 
-    if ($payments_per_year == NULL){
+    if ($payments_per_year == NULL) {
       $form_state->setErrorByName('payments_per_year', $this->t('You must fill Number of Payments Per Year field'));
     }
 
-    if ($extra_payments == NULL){
+    if ($extra_payments == NULL) {
       $form_state->setErrorByName('extra_payments', $this->t('You must fill Optional Extra Payments field'));
     }
   }
@@ -246,8 +242,7 @@ class LoanForm extends FormBase {
 
     Drupal::logger('loan')->info($uid);
 
-    $form_state-> setRebuild();
-
+    $form_state->setRebuild();
 
     return;
   }

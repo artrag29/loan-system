@@ -1,6 +1,6 @@
 
 loan.loan_form:
-  path: '/loan/form/loan'
+  path: '/form/loan'
   defaults:
     _form: '\Drupal\loan\Form\LoanForm'
     _title: 'LoanForm'

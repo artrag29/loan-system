@@ -1,0 +1,6 @@
+start_date: '2019-01-01'
+loan_amount: '10'
+interest_rate: '1'
+loan_period: '1'
+payments_per_year: '12'
+extra_payments: '0'

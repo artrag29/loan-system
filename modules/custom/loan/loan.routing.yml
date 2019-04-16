@@ -6,3 +6,13 @@ loan.loan_form:
     _title: 'LoanForm'
   requirements:
     _access: 'TRUE'
+loan.loan_config_form:
+  path: '/admin/config/loan/loanconfig'
+  defaults:
+    _form: '\Drupal\loan\Form\LoanConfigForm'
+    _title: 'LoanConfigForm'
+  requirements:
+    _permission: 'access administration pages'
+  options:
+    _admin_route: TRUE
+

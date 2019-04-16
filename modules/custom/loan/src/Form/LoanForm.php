@@ -22,10 +22,13 @@ class LoanForm extends FormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
+    $config = \Drupal::config('loan.loanconfig');
+
 
     $form['start_date'] = [
       '#type' => 'date',
       '#title' => $this->t('Start Date of Loan'),
+      '#default_value' => $config->get('start_date'),
       '#weight' => '0',
       '#required' => TRUE,
     ];
@@ -33,7 +36,7 @@ class LoanForm extends FormBase {
     $form['loan_amount'] = [
       '#type' => 'number',
       '#title' => $this->t('Loan Amount'),
-      '#default_value' => '0',
+      '#default_value' => $config->get('loan_amount'),
       '#weight' => '0',
       '#required' => TRUE,
       '#min' => 1,
@@ -42,7 +45,7 @@ class LoanForm extends FormBase {
     $form['interest_rate'] = [
       '#type' => 'number',
       '#title' => $this->t('Annual Interest Rate'),
-      '#default_value' => '0',
+      '#default_value' => $config->get('interest_rate'),
       '#weight' => '0',
       '#required' => TRUE,
     ];
@@ -50,7 +53,7 @@ class LoanForm extends FormBase {
     $form['loan_period'] = [
       '#type' => 'number',
       '#title' => $this->t('Loan Period in Years'),
-      '#default_value' => '0',
+      '#default_value' => $config->get('loan_period'),
       '#weight' => '0',
       '#required' => TRUE,
       '#min' => 1,
@@ -59,7 +62,7 @@ class LoanForm extends FormBase {
     $form['payments_per_year'] = [
       '#type' => 'number',
       '#title' => $this->t('Number of Payments Per Year'),
-      '#default_value' => '0',
+      '#default_value' => $config->get('payments_per_year'),
       '#weight' => '0',
       '#required' => TRUE,
       '#min' => 1,
@@ -69,7 +72,7 @@ class LoanForm extends FormBase {
     $form['extra_payments'] = [
       '#type' => 'number',
       '#title' => $this->t('Optional Extra Payments'),
-      '#default_value' => '0',
+      '#default_value' => $config->get('extra_payments'),
       '#weight' => '0',
       '#required' => TRUE,
     ];

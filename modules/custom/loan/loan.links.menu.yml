@@ -1,0 +1,7 @@
+loan.loan_config_form:
+  title: 'LoanConfigForm'
+  route_name: loan.loan_config_form
+  description: 'A description for the menu entry'
+  parent: system.admin_config_system
+  weight: 99
+
